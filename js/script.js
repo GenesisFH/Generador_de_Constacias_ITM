@@ -43,6 +43,10 @@ document
         nombreCompleto:
           row["NOMBRE DEL PARTICIPANTE"] || "Nombre no especificado",
         clave: row["CLAVE"] || "Clave no especificada",
+        curso: row["CURSO"] || "Curso no especificado",
+        periodo: row["PERIODO"] || "Periodo no especificado",
+        fechaTerminacion:
+          row["FECHA DE TERMINACION"] || "Fecha de terminación no especificada",
       }));
 
       const tipoConstancia = document.getElementById("tipoConstancia").value;
@@ -69,6 +73,11 @@ async function generatePDF(data, templatePath) {
   const pages = pdfDoc.getPages();
   const firstPage = pages[0];
 
+  const claveText = `CLAVE: ${data.clave}`;
+  const cursoText = `"${data.curso}"`;
+  const periodoText = `DEL DIA  ${data.periodo}`;
+  const fechaTerminacionText = `MEXICALI, B.C. A ${data.fechaTerminacion}`;
+
   firstPage.drawText(data.nombreCompleto, {
     x: 250,
     y: 320,
@@ -76,10 +85,30 @@ async function generatePDF(data, templatePath) {
     color: PDFLib.rgb(0, 0, 0),
   });
 
-  firstPage.drawText(data.clave, {
+  firstPage.drawText(claveText, {
     x: 600,
     y: 200,
     size: 24,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+  firstPage.drawText(cursoText, {
+    x: 50,
+    y: 100,
+    size: 18,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+
+  firstPage.drawText(periodoText, {
+    x: 50,
+    y: 70,
+    size: 18,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+
+  firstPage.drawText(fechaTerminacionText, {
+    x: 50,
+    y: 40,
+    size: 18,
     color: PDFLib.rgb(0, 0, 0),
   });
 
