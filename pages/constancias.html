@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Constancias</title>
+    <link rel="stylesheet" href="../css/constancias.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Generador de Constancias</h1>
+      <form id="constanciaForm">
+        <div class="campo">
+          <label class="info info__nombre">Nombres</label>
+          <input
+            class="inputs"
+            type="text"
+            id="nombres"
+            placeholder="Nombres"
+          />
+        </div>
+        <div class="campo">
+          <label class="info info__apellidoP">Apellido Paterno</label>
+          <input
+            class="inputs"
+            type="text"
+            id="apellidoPaterno"
+            placeholder="Apellido Paterno"
+          />
+        </div>
+        <div class="campo">
+          <label class="info info__apellidoM">Apellido Materno</label>
+          <input
+            class="inputs"
+            type="text"
+            id="apellidoMaterno"
+            placeholder="Apellido Materno"
+          />
+        </div>
+        <div class="campo">
+          <label class="info info__codigo">Código</label>
+          <input class="inputs" type="text" id="codigo" placeholder="Código" />
+        </div>
+        <div class="campo">
+          <label class="info info__nombreArchivo">Nombre del Archivo</label>
+          <input
+            class="inputs"
+            type="text"
+            id="nombreArchivo"
+            placeholder="Nombre del Archivo"
+          />
+        </div>
+        <div class="constancia-section">
+          <label class="constancia-label">Tipo de Constancia</label>
+          <select id="tipoConstancia">
+            <option value="tipo1">Tipo de Constancia 1</option>
+            <option value="tipo2">Tipo de Constancia 2</option>
+            <option value="tipo3">Tipo de Constancia 3</option>
+            <option value="tipo4">Tipo de Constancia 4</option>
+          </select>
+        </div>
+        <button type="submit">Generar Constancia</button>
+      </form>
+      <h2>Generar Constancias desde Excel</h2>
+      <input type="file" id="fileInput" accept=".xlsx, .xls" />
+      <button id="generateFromExcel">Generar Constancias desde Excel</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
