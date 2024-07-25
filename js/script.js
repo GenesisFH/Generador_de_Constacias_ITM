@@ -8,13 +8,16 @@ document
         document.getElementById("apellidoPaterno").value
       } ${document.getElementById("apellidoMaterno").value}`,
       clave: document.getElementById("codigo").value,
+      curso: document.getElementById("curso").value,
+      periodo: document.getElementById("periodo").value,
+      fechaTerminacion: document.getElementById("fechaTerminacion").value,
       nombreArchivo: document.getElementById("nombreArchivo").value,
     };
 
     const tipoConstancia = document.getElementById("tipoConstancia").value;
     const templatePath = `../templates/${tipoConstancia}.pdf`;
 
-    const pdfBytes = await generatePDF(data, templatePath);
+    const pdfBytes = await generatePDF(data, tipoConstancia, templatePath);
     download(pdfBytes, `${data.nombreArchivo}.pdf`, "application/pdf");
   });
 
@@ -54,7 +57,11 @@ document
 
       const zip = new JSZip();
       for (const registro of registros) {
-        const pdfBytes = await generatePDF(registro, templatePath);
+        const pdfBytes = await generatePDF(
+          registro,
+          tipoConstancia,
+          templatePath
+        );
         zip.file(`${registro.nombreCompleto}.pdf`, pdfBytes);
       }
 
@@ -65,7 +72,38 @@ document
     reader.readAsArrayBuffer(file);
   });
 
-async function generatePDF(data, templatePath) {
+const coordenadas = {
+  tipo1: {
+    nombre: { x: 200, y: 410 },
+    curso: { x: 240, y: 355 },
+    periodo: { x: 187, y: 315 },
+    clave: { x: 250, y: 272 },
+    fechaTerminacion: { x: 207, y: 285 },
+  },
+  tipo2: {
+    nombre: { x: 200, y: 410 },
+    curso: { x: 240, y: 355 },
+    periodo: { x: 187, y: 315 },
+    clave: { x: 250, y: 272 },
+    fechaTerminacion: { x: 207, y: 285 },
+  },
+  tipo3: {
+    nombre: { x: 200, y: 415 },
+    curso: { x: 240, y: 336 },
+    periodo: { x: 187, y: 298 },
+    clave: { x: 250, y: 258 },
+    fechaTerminacion: { x: 207, y: 272 },
+  },
+  tipo4: {
+    nombre: { x: 200, y: 410 },
+    curso: { x: 240, y: 355 },
+    periodo: { x: 187, y: 315 },
+    clave: { x: 250, y: 272 },
+    fechaTerminacion: { x: 207, y: 285 },
+  },
+};
+
+async function generatePDF(data, tipoConstancia, templatePath) {
   const existingPdfBytes = await fetch(templatePath).then((res) =>
     res.arrayBuffer()
   );
@@ -75,40 +113,47 @@ async function generatePDF(data, templatePath) {
 
   const claveText = `CLAVE: ${data.clave}`;
   const cursoText = `"${data.curso}"`;
-  const periodoText = `DEL DIA  ${data.periodo}`;
+  const periodoText = `DEL DIA ${data.periodo}`;
   const fechaTerminacionText = `MEXICALI, B.C. A ${data.fechaTerminacion}`;
 
+  const nombreCompletoParts = data.nombreCompleto.split(" ");
+  let nombreX = coordenadas[tipoConstancia].nombre.x;
+  if (nombreCompletoParts.length > 3) {
+    nombreX -= 50; // Ajustar esta coordenada según sea necesario
+  }
+
   firstPage.drawText(data.nombreCompleto, {
-    x: 250,
-    y: 320,
-    size: 24,
+    x: nombreX,
+    y: coordenadas[tipoConstancia].nombre.y,
+    size: 20,
     color: PDFLib.rgb(0, 0, 0),
   });
 
-  firstPage.drawText(claveText, {
-    x: 600,
-    y: 200,
-    size: 24,
-    color: PDFLib.rgb(0, 0, 0),
-  });
   firstPage.drawText(cursoText, {
-    x: 50,
-    y: 100,
-    size: 18,
+    x: coordenadas[tipoConstancia].curso.x,
+    y: coordenadas[tipoConstancia].curso.y,
+    size: 14,
     color: PDFLib.rgb(0, 0, 0),
   });
 
   firstPage.drawText(periodoText, {
-    x: 50,
-    y: 70,
-    size: 18,
+    x: coordenadas[tipoConstancia].periodo.x,
+    y: coordenadas[tipoConstancia].periodo.y,
+    size: 14,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+
+  firstPage.drawText(claveText, {
+    x: coordenadas[tipoConstancia].clave.x,
+    y: coordenadas[tipoConstancia].clave.y,
+    size: 10,
     color: PDFLib.rgb(0, 0, 0),
   });
 
   firstPage.drawText(fechaTerminacionText, {
-    x: 50,
-    y: 40,
-    size: 18,
+    x: coordenadas[tipoConstancia].fechaTerminacion.x,
+    y: coordenadas[tipoConstancia].fechaTerminacion.y,
+    size: 11,
     color: PDFLib.rgb(0, 0, 0),
   });
 
