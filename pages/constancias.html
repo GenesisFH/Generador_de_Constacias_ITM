@@ -1,93 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generador de Constancias</title>
-    <link rel="stylesheet" href="../css/constancias.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/constancias.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Generador de Constancias</h1>
-      <form id="constanciaForm">
-        <div class="campo">
-          <label class="info info__nombre">Nombres</label>
-          <input
-            class="inputs"
-            type="text"
-            id="nombres"
-            placeholder="Nombres"
-          />
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card custom-card">
+            <h1 class="text-center">Generador de Constancias</h1>
+            <p class="lead text-center">
+             Complete los campos del formulario para generar una constancia. 
+              Asegúrese de que toda la información sea correcta antes de proceder.
+            </p>
+            <form id="constanciaForm">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="tipoConstancia">Tipo de Constancia</label>
+                  <select class="form-control" id="tipoConstancia">
+                    <option value="tipo1">Tipo de Constancia 1</option>
+                    <option value="tipo2">Tipo de Constancia 2</option>
+                    <option value="tipo3">Tipo de Constancia 3</option>
+                    <option value="tipo4">Tipo de Constancia 4</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="nombres">Nombres</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombres"
+                    placeholder="Nombres"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="apellidoPaterno">Apellido Paterno</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellidoPaterno"
+                    placeholder="Apellido Paterno"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="apellidoMaterno">Apellido Materno</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apellidoMaterno"
+                    placeholder="Apellido Materno"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="codigo">Código</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="codigo"
+                    placeholder="Código"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="curso">Curso</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="curso"
+                    placeholder="Curso"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="periodo">Periodo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="periodo"
+                    placeholder="Periodo"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="fechaTerminacion">Fecha de Terminación</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fechaTerminacion"
+                    placeholder="Fecha de Terminación"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombreArchivo">Nombre del Archivo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreArchivo"
+                  placeholder="Nombre del Archivo"
+                />
+              </div>
+              <button type="submit" class="btn custom-btn-primary btn-block">
+                Generar Constancia
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="campo">
-          <label class="info info__apellidoP">Apellido Paterno</label>
-          <input
-            class="inputs"
-            type="text"
-            id="apellidoPaterno"
-            placeholder="Apellido Paterno"
-          />
+        <div class="col-md-4">
+          <div class="card custom-card">
+            <h2 class="text-center mt-4">Seleccione archivo de excel</h2>
+            <p class="lead text-center">
+              Si desea generar multiples constancias, seleccione un archivo y haga clic en generar constancias desde excel. Recuerde seleccionar su tipo de constancia
+            </p>
+            
+            <div class="form-group text-center">
+              <input
+                type="file"
+                class="form-control-file"
+                id="fileInput"
+                accept=".xlsx, .xls"
+              />
+            </div>
+            <button id="generateFromExcel" class="btn custom-btn-success btn-block">
+              Generar Constancias desde Excel
+            </button>
+          </div>
         </div>
-        <div class="campo">
-          <label class="info info__apellidoM">Apellido Materno</label>
-          <input
-            class="inputs"
-            type="text"
-            id="apellidoMaterno"
-            placeholder="Apellido Materno"
-          />
-        </div>
-        <div class="campo">
-          <label class="info info__codigo">Código</label>
-          <input class="inputs" type="text" id="codigo" placeholder="Código" />
-        </div>
-        <div class="campo">
-          <label class="info info__curso">Curso</label>
-          <input class="inputs" type="text" id="curso" placeholder="Curso" />
-        </div>
-        <div class="campo">
-          <label class="info info__periodo">Periodo</label>
-          <input
-            class="inputs"
-            type="text"
-            id="periodo"
-            placeholder="Periodo"
-          />
-        </div>
-        <div class="campo">
-          <label class="info info__fechaTerminacion"
-            >Fecha de Terminación</label
-          >
-          <input
-            class="inputs"
-            type="text"
-            id="fechaTerminacion"
-            placeholder="Fecha de Terminación"
-          />
-        </div>
-        <div class="campo">
-          <label class="info info__nombreArchivo">Nombre del Archivo</label>
-          <input
-            class="inputs"
-            type="text"
-            id="nombreArchivo"
-            placeholder="Nombre del Archivo"
-          />
-        </div>
-        <div class="constancia-section">
-          <label class="constancia-label">Tipo de Constancia</label>
-          <select id="tipoConstancia">
-            <option value="tipo1">Tipo de Constancia 1</option>
-            <option value="tipo2">Tipo de Constancia 2</option>
-            <option value="tipo3">Tipo de Constancia 3</option>
-            <option value="tipo4">Tipo de Constancia 4</option>
-          </select>
-        </div>
-        <button type="submit">Generar Constancia</button>
-      </form>
-      <h2>Generar Constancias desde Excel</h2>
-      <input type="file" id="fileInput" accept=".xlsx, .xls" />
-      <button id="generateFromExcel">Generar Constancias desde Excel</button>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
