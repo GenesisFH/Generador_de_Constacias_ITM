@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página Principal</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
     <div class="main-container">
-        <h1>Página Principal</h1>
-        <div class="button-container">
-            <button onclick="generateConstancia()">Generar Constancia</button>
-            <button onclick="manageUsers()">Administrar Usuarios</button>
-        </div>
+      <h1>Página Principal</h1>
+      <div class="button-container">
+        <button onclick="generateConstancia()">Generar Constancia</button>
+        <button onclick="manageUsers()">Administrar Usuarios</button>
+      </div>
     </div>
     <div class="encabezado-itm">
-        <img src="/recursos/itm.jpg" alt="encabezado del itm">
+      <img src="/recursos/itm.jpg" alt="encabezado del itm" />
     </div>
     <div class="diseño-top"></div>
     <div class="diseño-bottom"></div>
     <script src="js/main.js"></script>
 
     <script>
-        function generateConstancia() {
-            // Lógica para generar constancia
-            alert("Generar Constancia");
-        }
+      function generateConstancia() {
+        window.location.href = "/pages/constancias.html";
+      }
 
-        function manageUsers() {
-            window.location.href = '/usuarios/user.html';
-        }
+      function manageUsers() {
+        window.location.href = "/usuarios/user.html";
+      }
     </script>
-</body>
+  </body>
 </html>

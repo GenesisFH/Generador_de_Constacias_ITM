@@ -1,53 +1,91 @@
-
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+  background-color: #f0f2f5;
+  color: #343a40;
+  font-family: 'Arial', sans-serif;
 }
 
 .container {
-  max-width: 800px;
-  margin: 50px auto;
+  max-width: 1200px; /* Aumentar el ancho del contenedor */
+  margin: auto;
   padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1,
-h2 {
-  text-align: center;
-}
-
-.campo {
-  margin-bottom: 15px;
-}
-
-.campo label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.campo input,
-.campo select {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background: #007bff;
-  color: white;
+.custom-card {
+  background-color: #ffffff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-button:hover {
-  background: #0056b3;
+h1, h2 {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+.lead {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #555555;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.custom-btn-primary {
+  background-color: #0066cc;
+  border-color: #0066cc;
+  color: #ffffff;
+}
+
+.custom-btn-primary:hover {
+  background-color: #004d99;
+  border-color: #004080;
+}
+
+.custom-btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  font-size: 1rem;
+  padding: 10px 20px;
+  color: #ffffff;
+}
+
+.custom-btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-block {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#generateFromExcel {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+input.form-control {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.form-control-file {
+  border: 1px solid #ced4da;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
