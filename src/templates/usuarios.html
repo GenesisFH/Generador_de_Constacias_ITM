@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Drive</title>
+    <link rel="stylesheet" href="../static/css/client.css" />
+    <link rel="icon" href="../static/img/icono.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>PDF Disponibles</h1>
+        <nav>
+          <a href="#">Inicio</a>
+          <a href="#">Compartidos</a>
+          <a href="#">Recientes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <form id="file-form">
+        <div class="file-container">
+          <div class="file-card">
+            <label class="select-file">
+              <input
+                type="checkbox"
+                name="file-select"
+                value="fake-document1.pdf"
+              />
+              <span class="checkbox-check"></span>
+            </label>
+            <img src="../static/img/pdf-icon.png" alt="PDF Icon" class="file-icon" />
+            <div class="file-info">
+              <p class="file-name">Documento Importante</p>
+              <a href="fake-document1.pdf" class="file-link" target="_blank"
+                >Ver Documento</a
+              >
+            </div>
+          </div>
+          <div class="file-card">
+            <label class="select-file">
+              <input
+                type="checkbox"
+                name="file-select"
+                value="fake-document1.pdf"
+              />
+              <span class="checkbox-check"></span>
+            </label>
+            <img src="pdf-icon.png" alt="PDF Icon" class="file-icon" />
+            <div class="file-info">
+              <p class="file-name">Documento Importante</p>
+              <a href="fake-document1.pdf" class="file-link" target="_blank"
+                >Ver Documento</a
+              >
+            </div>
+          </div>
+          <div class="file-card">
+            <label class="select-file">
+              <input
+                type="checkbox"
+                name="file-select"
+                value="fake-document1.pdf"
+              />
+              <span class="checkbox-check"></span>
+            </label>
+            <img src="pdf-icon.png" alt="PDF Icon" class="file-icon" />
+            <div class="file-info">
+              <p class="file-name">Documento Importante</p>
+              <a href="fake-document1.pdf" class="file-link" target="_blank"
+                >Ver Documento</a
+              >
+            </div>
+          </div>
+          <div class="file-card">
+            <label class="select-file">
+              <input
+                type="checkbox"
+                name="file-select"
+                value="fake-document1.pdf"
+              />
+              <span class="checkbox-check"></span>
+            </label>
+            <img src="pdf-icon.png" alt="PDF Icon" class="file-icon" />
+            <div class="file-info">
+              <p class="file-name">Documento Importante</p>
+              <a href="fake-document1.pdf" class="file-link" target="_blank"
+                >Ver Documento</a
+              >
+            </div>
+          </div>
+          <div class="file-card">
+            <label class="select-file">
+              <input
+                type="checkbox"
+                name="file-select"
+                value="fake-document1.pdf"
+              />
+              <span class="checkbox-check"></span>
+            </label>
+            <img src="pdf-icon.png" alt="PDF Icon" class="file-icon" />
+            <div class="file-info">
+              <p class="file-name">Documento Importante</p>
+              <a href="fake-document1.pdf" class="file-link" target="_blank"
+                >Ver Documento</a
+              >
+            </div>
+          </div>
+          <!-- Añadir más archivos según sea necesario -->
+        </div>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Mi Drive. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Botón de papelera -->
+    <a href="#" id="trash-button">
+      <img src="/Recursos/trash-icon.png" alt="Papelera" />
+    </a>
+
+    <script>
+      // Script para manejar la eliminación de archivos
+      document
+        .getElementById("trash-button")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const selectedFiles = document.querySelectorAll(
+            'input[name="file-select"]:checked'
+          );
+          if (selectedFiles.length > 0) {
+            let filesToDelete = Array.from(selectedFiles).map(
+              (input) => input.value
+            );
+            alert(`Eliminando archivos: ${filesToDelete.join(", ")}`);
+            // Aquí puedes añadir la lógica para eliminar los archivos seleccionados
+          } else {
+            alert("Por favor, selecciona al menos un archivo para eliminar.");
+          }
+        });
+    </script>
+  </body>
+</html>

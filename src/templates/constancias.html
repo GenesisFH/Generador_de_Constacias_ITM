@@ -8,8 +8,8 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/constancias.css" />
+    <link rel="stylesheet" href="../static/css/normalize.css" />
+    <link rel="stylesheet" href="../static/css/constancias.css" />
   </head>
   <body>
     <div class="container mt-3">
@@ -18,8 +18,9 @@
           <div class="card custom-card">
             <h1 class="text-center">Generador de Constancias</h1>
             <p class="lead text-center">
-             Complete los campos del formulario para generar una constancia. 
-              Asegúrese de que toda la información sea correcta antes de proceder.
+              Complete los campos del formulario para generar una constancia.
+              Asegúrese de que toda la información sea correcta antes de
+              proceder.
             </p>
             <form id="constanciaForm">
               <div class="form-row">
@@ -121,9 +122,11 @@
           <div class="card custom-card">
             <h2 class="text-center mt-4">Seleccione archivo de excel</h2>
             <p class="lead text-center">
-              Si desea generar multiples constancias, seleccione un archivo y haga clic en generar constancias desde excel. Recuerde seleccionar su tipo de constancia
+              Si desea generar multiples constancias, seleccione un archivo y
+              haga clic en generar constancias desde excel. Recuerde seleccionar
+              su tipo de constancia
             </p>
-            
+
             <div class="form-group text-center">
               <input
                 type="file"
@@ -132,7 +135,10 @@
                 accept=".xlsx, .xls"
               />
             </div>
-            <button id="generateFromExcel" class="btn custom-btn-success btn-block">
+            <button
+              id="generateFromExcel"
+              class="btn custom-btn-success btn-block"
+            >
               Generar Constancias desde Excel
             </button>
           </div>
@@ -143,6 +149,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/constancias.js"></script>
   </body>
 </html>

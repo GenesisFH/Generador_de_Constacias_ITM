@@ -1,0 +1,181 @@
+/* Estilos generales */
+body, h1, p, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f3f4;
+    color: #202124;
+}
+
+header {
+    background-color: #000000;
+    color: rgb(238, 255, 0);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content h1 {
+    font-size: 24px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: rgb(238, 255, 0);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 80px 20px 20px;
+}
+
+.file-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.file-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    position: relative;
+}
+
+.file-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.file-info {
+    margin-top: 10px;
+}
+
+.file-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.file-link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.file-link:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+/* Botón de papelera */
+#trash-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#trash-button img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Estilos para la casilla de verificación */
+.select-file {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.select-file input[type="checkbox"] {
+    display: none;
+}
+
+.select-file .checkbox-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000000;
+    border-radius: 3px; /* Hacemos las casillas cuadradas */
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+}
+
+.select-file input[type="checkbox"]:checked + .checkbox-check {
+    background-color: #000000;
+}
+
+.select-file input[type="checkbox"]:checked + .checkbox-check::after {
+    content: "✔";
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #000000;
+}
