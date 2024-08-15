@@ -13,7 +13,7 @@ def login():
 def main():
     return render_template("main.html")
 
-@app.route("/constancias")
+@app.route("/constancias", methods=["GET", "POST"])
 def constancias():
     return render_template("constancias.html")
 
