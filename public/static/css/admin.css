@@ -1,0 +1,82 @@
+  /* Estilos adicionales */
+  body {
+    font-family: 'PT Sans', sans-serif;
+    background-color: #f8f9fa;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.nav-link {
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.nav-link:hover {
+    color: #007bff;
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: bold;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button.editar {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Estilos para los botones de editar */
+button.editar, button.editar-p {
+  background-color: #ffc107;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.editar:hover {
+  background-color: #e0a800;
+}
+
+/* Estilos para los botones de eliminar */
+button.eliminar, button.eliminar-p {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.eliminar:hover {
+  background-color: #c82333;
+}
+
+img{
+  width: 50px;
+  height: 50px;
+}
