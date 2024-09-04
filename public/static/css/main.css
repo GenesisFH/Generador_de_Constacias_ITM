@@ -41,7 +41,7 @@ button:hover {
 }
 
 .encabezado-itm {
-    width: 100%; /* Ancho del rectángulo */
+    width: 140%; /* Ancho del rectángulo */
     height: 17%; /* Altura del rectángulo */
     position: absolute;
     top: 0;
