@@ -17,7 +17,9 @@ section{
 }
 
 body {
-    background-image: url("../img/Luis_Carlos.jpeg");
+    background-image: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+        url("../img/Luis_Carlos.jpeg"); /* Degradado oscuro sobre la imagen */
     background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
     background-position: center center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -27,6 +29,7 @@ body {
     min-height: 100vh; /* Asegura que el contenido ocupe al menos el 100% de la altura de la ventana */
     margin: 0; /* Elimina los márgenes predeterminados del body */
 }
+
 
 
 .encabezado-itm {
