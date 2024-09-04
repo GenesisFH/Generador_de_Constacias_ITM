@@ -17,11 +17,17 @@ section{
 }
 
 body {
-    background-color: #ffd21b;
+    background-image: url("../img/Luis_Carlos.jpeg");
+    background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+    background-position: center center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 100vh; /* Asegura que el contenido ocupe al menos el 100% de la altura de la ventana */
+    margin: 0; /* Elimina los márgenes predeterminados del body */
 }
+
 
 .encabezado-itm {
     width: 100%; /* Ancho del rectángulo */
