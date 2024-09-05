@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="static/css/normalize.css" />
+    <link rel="stylesheet" href="static/css/admin.css" />
+    <title>Constancias</title>
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <section id="sec-constancias">
+          <!-- Sección de Productos -->
+          <h2 class="mt-4 mb-4">Constancias</h2>
+
+          <table id="constancia-table" class="table">
+            <!-- Tabla para mostrar la lista de productos -->
+            <thead class="thead-dark">
+              <!-- Encabezado de la tabla -->
+              <tr>
+                <th>ID</th>
+                <!-- Columna de ID -->
+                <th>Archivo</th>
+                <!-- Columna de Producto -->
+                <th>Fecha</th>
+                <!-- Columna de Precio -->
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Aquí se insertarán los productos dinámicamente -->
+            </tbody>
+          </table>
+          <!-- ... -->
+        </section>
+        <!-- ... -->
+        <button onclick="window.location.href = '/main';" class="btn btn-dark">
+          Regresar
+        </button>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS y jQuery (opcional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="js/review.js"></script>
+  </body>
+</html>

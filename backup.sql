@@ -116,6 +116,7 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES (1,'marcosantana110@gmail.com','12345678','Marco santana',1);
+INSERT INTO `users` VALUES (2,'genesisalonso@gmail.com','12345678','Genesis Alonso',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
