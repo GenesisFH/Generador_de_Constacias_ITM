@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css" />
     <link
       rel="icon"
@@ -24,8 +25,10 @@
             </div>
             <div class="input-contenedor">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" id="password" name="password" required />
+              <input type="password" class="pass" id="pass"/>
+              <i class='bx bx-show-alt'></i>
               <label for="password">Contraseña</label>
+              
             </div>
             <div class="olvidar">
               <label>
@@ -74,6 +77,20 @@
         console.error('Error:', error);
       });
     });
+    const pass = document.getElementById("pass"),
+      icon = document.querySelector(".bx");
+
+icon.addEventListener("click", e => {
+    if(pass.type = "password") {
+        pass.type = "text";
+        icon.classList.remove('bx-show-alt')
+        icon.classList.add('bx-hide');
+    } else {
+        pass.type = "password";
+        icon.classList.add('bx-show-alt');
+        icon.classList.remove('bx-hide');
+    }
+})
   </script>
   </body>
 </html>
