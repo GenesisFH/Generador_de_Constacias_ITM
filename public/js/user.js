@@ -136,8 +136,3 @@ $(document).ready(function () {
   // Cargar usuarios al cargar la página
   cargarUsuarios();
 });
-=======
-    // Cargar usuarios al cargar la página
-    cargarUsuarios();
-  });
-
