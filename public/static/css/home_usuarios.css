@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    background-color: #b58a15;
+}
+
+.login-container, .main-container {
+    background-color: #ffffff;
+    padding: 80px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3); 
+    border-radius: 10px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los botones */
+}
+button {
+    padding: 20px 40px;
+    border: none;
+    background-color: #242d6c;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 40px;
+}
+
+button:hover {
+    background-color: #1b4cff;
+}
+
+#errorMessage {
+    color: red;
+}
+
+.encabezado-itm {
+    width: 140%; /* Ancho del rectángulo */
+    height: 17%; /* Altura del rectángulo */
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.encabezado-itm img {
+    width: 30%;
+    height: 40%;
+    object-fit: cover;
+}
+
+.diseño-top {
+    width: 100%; /* Ancho del rectángulo */
+    height: 17%; /* Altura del rectángulo */
+    background-color: #fefefe; /* Color de fondo del rectángulo */
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+.diseño-bottom {
+    width: 100%; /* Ancho del rectángulo */
+    height: 17%; /* Altura del rectángulo */
+    background-color: #1b204f; /* Color de fondo del rectángulo */
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
+}

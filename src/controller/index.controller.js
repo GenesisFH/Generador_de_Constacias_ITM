@@ -27,7 +27,17 @@ controller.login = (req, res) => {
         // Credenciales válidas, establecer el estado de la sesión
         req.session.loggedIn = true;
         req.session.user = results[0]; // Puedes guardar información del usuario aquí
-        res.redirect("/main");
+        
+        // Verificar el tipo de usuario
+        const userType = results[0].userType;
+
+        if (userType === 0) {
+          // Redirigir a una página específica si usertype es 0
+          res.redirect("/home_usuario"); 
+        } else if (userType === 1) {
+          // Redirigir a la página de administrador
+          res.redirect("/main");
+        } 
       } else {
         // Credenciales inválidas
         res.status(401).send("Email o contraseña incorrectos");
@@ -57,4 +67,5 @@ controller.getUsers = (req, res) => {
     res.json(results); // Devolver los usuarios como JSON
   });
 };
+
 module.exports = controller;
