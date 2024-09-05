@@ -122,6 +122,8 @@ input:valid ~ label{
     font-size: 1rem;
     padding: -35px 0 5px;
     color: #000000;
+    display: flex;
+    align-items: center;
 }
 
 .input-contenedor i{
@@ -191,4 +193,10 @@ button:hover{
 
 .registrar p a:hover{
     text-decoration: underline;
+}
+
+.bx {
+    font-size: 30px;
+    transform: translateX(-35px);
+    cursor: pointer;
 }
