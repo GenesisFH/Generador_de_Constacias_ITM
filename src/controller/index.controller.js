@@ -67,5 +67,4 @@ controller.getUsers = (req, res) => {
     res.json(results); // Devolver los usuarios como JSON
   });
 };
-
 module.exports = controller;
