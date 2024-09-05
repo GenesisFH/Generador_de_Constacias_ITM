@@ -205,3 +205,36 @@ function download(data, fileName, mimeType) {
   a.click();
   window.URL.revokeObjectURL(url);
 }
+
+  // Función para mostrar una alerta solo una vez al enfocar los campos de texto
+  function showAlertOnce(input, message) {
+    if (!input.dataset.alerted) {
+      alert(message);
+      input.dataset.alerted = true; // Marca que la alerta ya fue mostrada
+    }
+  }
+
+  // Función para convertir a mayúsculas al escribir
+  function convertToUppercase(input) {
+    input.value = input.value.toUpperCase();
+  }
+
+  // Selecciona los campos de nombre, apellido paterno y materno
+  const camposValidar = document.querySelectorAll(
+    '#nombres, #apellidoPaterno, #apellidoMaterno'
+  );
+
+  // Agrega eventos a los campos seleccionados
+  camposValidar.forEach((campo) => {
+    // Muestra la alerta solo al primer foco para nombres y apellidos
+    campo.addEventListener('focus', () => showAlertOnce(campo, 'Favor de utilizar solo mayúsculas y revisar ortografía.'));
+
+    // Convierte a mayúsculas mientras se escribe
+    campo.addEventListener('input', () => convertToUppercase(campo));
+  });
+
+  // Selecciona el campo del número de horas
+  const campoHoras = document.getElementById('horasCurso');
+
+  // Agrega la alerta específica para el campo de horas
+  campoHoras.addEventListener('focus', () => showAlertOnce(campoHoras, 'Solo coloca número de horas.'));
