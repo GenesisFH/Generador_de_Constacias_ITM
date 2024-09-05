@@ -38,7 +38,16 @@ controller.login = (req, res) => {
       if (results.length > 0) {
         // Credenciales válidas, establecer el estado de la sesión
         req.session.loggedIn = true;
-        req.session.user = results[0]; // Puedes guardar información del usuario aquí
+        
+        // Guardar toda la información del usuario, incluyendo el usertype
+        const user = results[0];
+        req.session.user = {
+          idusuario: user.idusuario,
+          nombre: user.nombre,
+          email: user.email,
+          usertype: user.usertype, // Guardamos el usertype
+        };
+
         res.redirect("/main");
       } else {
         // Credenciales inválidas
@@ -47,6 +56,7 @@ controller.login = (req, res) => {
     }
   );
 };
+
 
 // Método para obtener los usuarios de la base de datos y enviarlos como JSON
 controller.getUsers = (req, res) => {

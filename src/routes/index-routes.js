@@ -25,6 +25,14 @@ router.get("/main", authMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, "../../public/main.html"));
 });
 
+router.get("/getUserType", authMiddleware, (req, res) => {
+  if (req.session.user) {
+    res.json({ userType: req.session.user.usertype });
+  } else {
+    res.status(401).json({ error: "Usuario no autenticado" });
+  }
+});
+
 // Ruta para manejar el inicio de sesión usando el controlador
 router.post("/login", controller.login);
 
