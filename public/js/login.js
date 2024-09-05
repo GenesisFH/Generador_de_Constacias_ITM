@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     loginForm.addEventListener("submit", function(event) {
         const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
+        const password = document.getElementById("password").value;
 
-        if (!email || !pass) {
+        if (!email || !password) {
             event.preventDefault();
             alert("Por favor, rellene todos los campos.");
         }

@@ -25,7 +25,7 @@
             </div>
             <div class="input-contenedor">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" class="pass" id="pass"/>
+              <input type="password" class="password" id="password" name="password"/>
               <i class='bx bx-show-alt'></i>
               <label for="password">Contraseña</label>
               
@@ -80,16 +80,16 @@
     const pass = document.getElementById("pass"),
       icon = document.querySelector(".bx");
 
-icon.addEventListener("click", e => {
-    if(pass.type = "password") {
-        pass.type = "text";
-        icon.classList.remove('bx-show-alt')
-        icon.classList.add('bx-hide');
-    } else {
-        pass.type = "password";
-        icon.classList.add('bx-show-alt');
-        icon.classList.remove('bx-hide');
-    }
+    icon.addEventListener("click", e => {
+        if(password.type = "password") {
+            password.type = "text";
+            icon.classList.remove('bx-show-alt')
+            icon.classList.add('bx-hide');
+        } else {
+            password.type = "password";
+            icon.classList.add('bx-show-alt');
+            icon.classList.remove('bx-hide');
+        }
 })
   </script>
   </body>
