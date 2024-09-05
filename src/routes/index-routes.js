@@ -18,6 +18,8 @@ router.get("/administrar", authMiddleware, controller.administrar);
 // Ruta para obtener usuarios (usada por el CRUD de usuarios)
 router.get("/users", authMiddleware, controller.getUsers);
 
+router.get("/review", authMiddleware, controller.review);
+
 // Ruta protegida para la página principal después de iniciar sesión
 router.get("/main", authMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, "../../public/main.html"));

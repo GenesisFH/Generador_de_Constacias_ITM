@@ -8,6 +8,18 @@ controller.index = (req, res) => {
   res.sendFile(path.join(__dirname, "../../public/auth/login.html"));
 };
 
+controller.constancias = (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/constancias.html"));
+};
+
+// Método para servir la página de administración de usuarios
+controller.administrar = (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/crudUsuarios.html"));
+};
+
+controller.review = (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/reviewConstancias.html"));
+};
 // Método para manejar el inicio de sesión
 controller.login = (req, res) => {
   const { email, password } = req.body;
@@ -36,15 +48,6 @@ controller.login = (req, res) => {
   );
 };
 
-controller.constancias = (req, res) => {
-  res.sendFile(path.join(__dirname, "../../public/constancias.html"));
-};
-
-// Método para servir la página de administración de usuarios
-controller.administrar = (req, res) => {
-  res.sendFile(path.join(__dirname, "../../public/crudUsuarios.html"));
-};
-
 // Método para obtener los usuarios de la base de datos y enviarlos como JSON
 controller.getUsers = (req, res) => {
   connection.query("SELECT * FROM users", (err, results) => {
@@ -67,7 +70,8 @@ controller.addUser = (req, res) => {
     return;
   }
 
-  const sql = "INSERT INTO users (nombre, email, usertype, password) VALUES (?, ?, ?, ?)";
+  const sql =
+    "INSERT INTO users (nombre, email, usertype, password) VALUES (?, ?, ?, ?)";
   connection.query(sql, [nombre, email, usertype, password], (err, results) => {
     if (err) {
       console.error("Error al agregar el usuario:", err);
@@ -108,14 +112,18 @@ controller.updateUser = (req, res) => {
 
   // Si no se proporcionó ningún campo para actualizar
   if (fieldsToUpdate.length === 0) {
-    return res.status(400).send("No se ha proporcionado ningún campo para actualizar");
+    return res
+      .status(400)
+      .send("No se ha proporcionado ningún campo para actualizar");
   }
 
   // Agregamos el id del usuario al final de los valores a pasar en la consulta
   values.push(id);
 
   // Creamos la consulta dinámica
-  const sql = `UPDATE users SET ${fieldsToUpdate.join(", ")} WHERE idusuario = ?`;
+  const sql = `UPDATE users SET ${fieldsToUpdate.join(
+    ", "
+  )} WHERE idusuario = ?`;
 
   connection.query(sql, values, (err, results) => {
     if (err) {
@@ -127,7 +135,6 @@ controller.updateUser = (req, res) => {
     res.send("Usuario actualizado exitosamente");
   });
 };
-
 
 // Método para eliminar un usuario de la base de datos
 controller.deleteUser = (req, res) => {
