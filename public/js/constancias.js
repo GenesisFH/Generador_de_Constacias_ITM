@@ -229,10 +229,14 @@ function download(data, fileName, mimeType) {
   window.URL.revokeObjectURL(url);*/
   uploadToServer(blob, fileName);
 }
-
+// lo
 function uploadToServer(file, fileName) {
   const formData = new FormData();
   formData.append('file', file, fileName);
+
+  // Captura el valor del nombre del archivo del input en el formulario
+  const nombreArchivo = document.getElementById("nombreArchivo").value.trim(); // Usar trim() para evitar espacios vacíos
+  formData.append('nombreArchivo', nombreArchivo || 'archivo_default'); // Si está vacío, asigna un nombre por defecto
 
   fetch('/upload', {
     method: 'POST',

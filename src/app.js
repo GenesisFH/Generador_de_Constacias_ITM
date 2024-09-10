@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ext); // Nombre único para evitar colisiones 
+    cb(null, file.fieldname + "-" + uniqueSuffix + ext); // Nombre único para evitar colisiones*/
   },
 });
 
@@ -61,6 +61,30 @@ app.post("/upload", upload.single("file"), (req, res) => {
   }
   return res.json({ message: "Subida exitosa", filePath: req.file.path });
 });
+
+app.get("/pdfs", (req, res) => {
+  fs.readdir(uploadDir, (err, files) => {
+    if (err) {
+      return res.status(500).json({ message: "Error al leer la carpeta" });
+    }
+
+    const pdfFiles = files
+      .filter(file => path.extname(file) === '.pdf')
+      .map(file => {
+        const filePath = path.join(uploadDir, file);
+        const stats = fs.statSync(filePath);
+        return {
+          name: file,
+          url: `/new-uploads/${file}`,
+          date: stats.mtime.toLocaleDateString() // Fecha de modificación
+        };
+      });
+
+    res.json(pdfFiles);
+  });
+});
+
+
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, "../public")));

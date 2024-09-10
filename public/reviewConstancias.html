@@ -22,32 +22,24 @@
     <div class="container">
       <main>
         <section id="sec-constancias">
-          <!-- Sección de PDF -->
           <h2 class="mt-4 mb-4">Constancias</h2>
 
           <table id="constancia-table" class="table">
-            <!-- Tabla para mostrar la lista de PDFs -->
             <thead class="thead-dark">
-              <!-- Encabezado de la tabla -->
               <tr>
-                <th>ID</th>
-                <!-- Columna de ID -->
                 <th>Archivo</th>
-                <!-- Columna de Archivo -->
+                <th>Enlace</th>
                 <th>Fecha</th>
-                <!-- Columna de La fecha en que se guardó el archivo -->
               </tr>
             </thead>
-            <tbody>
+            <tbody id="pdf-list">
               <!-- Aquí se insertarán los productos dinámicamente -->
             </tbody>
           </table>
-          <!-- ... -->
+          <button onclick="window.location.href = '/main';" class="btn btn-dark">
+            Regresar
+          </button>
         </section>
-        <!-- ... -->
-        <button onclick="window.location.href = '/main';" class="btn btn-dark">
-          Regresar
-        </button>
       </main>
     </div>
 
@@ -56,6 +48,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="js/review.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.get("/pdfs", function(data) {
+          const $tableBody = $("#pdf-list");
+          data.forEach(pdf => {
+            $tableBody.append(`
+              <tr>
+                <td>${pdf.name}</td>
+                <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
+                <td>${pdf.date}</td>
+              </tr>
+            `);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
