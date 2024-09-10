@@ -9,19 +9,24 @@ const port = 3000;
 // Importar la conexión a la base de datos
 const connection = require("./database");
 
-// Verificar y crear la carpeta de uploads si no existe
-const uploadDir = path.join(__dirname, "uploads");
+// Define el nombre de la nueva carpeta donde se guardarán los archivos
+const newFolderName = "new-uploads"; // Cambia "new-uploads" por el nombre deseado o usa una lógica dinámica
+const uploadDir = path.join(__dirname, newFolderName);
+
+// Verifica si la carpeta existe; si no, la crea
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
+  fs.mkdirSync(uploadDir, { recursive: true }); // { recursive: true } permite crear subdirectorios si es necesario
 }
 
-// Configuración de multer para guardar los archivos
+// Configuración de multer para guardar los archivos en la nueva carpeta
 const storage = multer.diskStorage({
-  destination: uploadDir,
+  destination: (req, file, cb) => {
+    cb(null, uploadDir); // Especifica la carpeta donde se guardará el archivo
+  },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ext);
+    cb(null, file.fieldname + "-" + uniqueSuffix + ext); // Nombre único para evitar colisiones 
   },
 });
 

@@ -154,6 +154,17 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     const textWidth = boldFont.widthOfTextAtSize(cursoText, fontSize);
     const xCentrado = (pageWidth - textWidth) / 2; // Centrar en la página
 
+   
+  
+  firstPage.drawText('This text was added with JavaScript!', {
+    x: 5,
+    y: height / 2 + 300,
+    size: 50,
+    font: helveticaFont,
+    color: rgb(0.95, 0.1, 0.1),
+    rotate: degrees(-45),
+  })
+
     firstPage.drawText(data.nombreCompleto, {
       x: nombreX,
       y: coordenadas[tipoConstancia].nombre.y,
@@ -208,17 +219,17 @@ async function generatePDF(data, tipoConstancia, templatePath) {
 
 function download(data, fileName, mimeType) {
   const blob = new Blob([data], { type: mimeType });
-  const url = window.URL.createObjectURL(blob);
+ /* const url = window.URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
   a.download = fileName;
   document.body.appendChild(a);
   a.click();
-  window.URL.revokeObjectURL(url);
+  window.URL.revokeObjectURL(url);*/
   uploadToServer(blob, fileName);
 }
-// lo
+
 function uploadToServer(file, fileName) {
   const formData = new FormData();
   formData.append('file', file, fileName);
