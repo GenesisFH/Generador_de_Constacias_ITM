@@ -216,6 +216,24 @@ function download(data, fileName, mimeType) {
   document.body.appendChild(a);
   a.click();
   window.URL.revokeObjectURL(url);
+  uploadToServer(blob, fileName);
+}
+// lo
+function uploadToServer(file, fileName) {
+  const formData = new FormData();
+  formData.append('file', file, fileName);
+
+  fetch('/upload', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('File uploaded successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error uploading file:', error);
+  });
 }
 
 // Función para mostrar una alerta solo una vez al enfocar los campos de texto
