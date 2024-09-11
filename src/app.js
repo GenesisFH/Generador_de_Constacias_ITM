@@ -18,6 +18,8 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true }); // { recursive: true } permite crear subdirectorios si es necesario
 }
 
+app.use('/new-uploads', express.static(uploadDir));
+
 // Configuración de multer para guardar los archivos en la nueva carpeta
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -44,6 +46,7 @@ const upload = multer({
 // Middleware para analizar el cuerpo de las solicitudes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 // Configurar express-session
 app.use(
@@ -83,6 +86,7 @@ app.get("/pdfs", (req, res) => {
     res.json(pdfFiles);
   });
 });
+
 
 
 

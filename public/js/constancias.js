@@ -154,16 +154,6 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     const textWidth = boldFont.widthOfTextAtSize(cursoText, fontSize);
     const xCentrado = (pageWidth - textWidth) / 2; // Centrar en la página
 
-   
-  
-  firstPage.drawText('This text was added with JavaScript!', {
-    x: 5,
-    y: height / 2 + 300,
-    size: 50,
-    font: helveticaFont,
-    color: rgb(0.95, 0.1, 0.1),
-    rotate: degrees(-45),
-  })
 
     firstPage.drawText(data.nombreCompleto, {
       x: nombreX,
