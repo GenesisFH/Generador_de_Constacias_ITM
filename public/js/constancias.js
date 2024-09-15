@@ -33,7 +33,10 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
 
   try {
     const pdfBytes = await generatePDF(data, tipoConstancia, templatePath);
+    // Decide si descargar el archivo o enviarlo al servidor
     download(pdfBytes, `${data.nombreArchivo}.pdf`, "application/pdf");
+    // Alternativamente, si prefieres subir al servidor:
+    // uploadToServer(pdfBytes, `${data.nombreArchivo}.pdf`);
   } catch (error) {
     console.error("Error al generar PDF:", error);
   }
@@ -201,9 +204,9 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     });
 
     firstPage.drawText(marcaAgua, {
-      x: xCentrado,  // Centrado
-      y: firstPage.getHeight() / 2,   // Centrado verticalmente
-      size: 50,
+      x: 60,  // Centrado
+      y: 150,   // Centrado verticalmente
+      size: 60,
       font: boldFont,
       color: PDFLib.rgb(1, 0, 0), // Rojo para resaltar
       opacity: 0.5, // Transparencia
@@ -236,9 +239,8 @@ function uploadToServer(file, fileName) {
   const formData = new FormData();
   formData.append('file', file, fileName);
 
-  // Captura el valor del nombre del archivo del input en el formulario
-  const nombreArchivo = document.getElementById("nombreArchivo").value.trim(); // Usar trim() para evitar espacios vacíos
-  formData.append('nombreArchivo', nombreArchivo || 'archivo_default'); // Si está vacío, asigna un nombre por defecto
+  const nombreArchivo = document.getElementById("nombreArchivo").value.trim();
+  formData.append('nombreArchivo', nombreArchivo || 'archivo_default');
 
   fetch('/upload', {
     method: 'POST',
@@ -252,6 +254,7 @@ function uploadToServer(file, fileName) {
     console.error('Error uploading file:', error);
   });
 }
+
 
 // Función para mostrar una alerta solo una vez al enfocar los campos de texto
 function showAlertOnce(input, message) {

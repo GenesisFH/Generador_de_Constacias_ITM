@@ -3,6 +3,7 @@ const path = require("path");
 const session = require("express-session");
 const multer = require("multer");
 const fs = require("fs"); // Librería para manejar el sistema de archivos
+
 const app = express();
 const port = 3000;
 
@@ -26,9 +27,8 @@ const storage = multer.diskStorage({
     cb(null, uploadDir); // Especifica la carpeta donde se guardará el archivo
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ext); // Nombre único para evitar colisiones*/
+    const originalName = req.body.nombreArchivo || file.originalname; // Usa el nombre del archivo proporcionado por el usuario o el nombre original
+    cb(null, originalName); // Usa el nombre proporcionado por el usuario
   },
 });
 
@@ -47,7 +47,6 @@ const upload = multer({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // Configurar express-session
 app.use(
   session({
@@ -58,13 +57,20 @@ app.use(
 );
 
 // Ruta para subir el archivo
-app.post("/upload", upload.single("file"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "Error al subir el archivo" });
-  }
-  return res.json({ message: "Subida exitosa", filePath: req.file.path });
+app.post("/upload", (req, res) => {
+  const uploadSingle = upload.single("file");
+  uploadSingle(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ message: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ message: "Error al subir el archivo" });
+    }
+    return res.json({ message: "Subida exitosa", filePath: req.file.path });
+  });
 });
 
+// Ruta para obtener la lista de archivos PDF
 app.get("/pdfs", (req, res) => {
   fs.readdir(uploadDir, (err, files) => {
     if (err) {
@@ -87,6 +93,25 @@ app.get("/pdfs", (req, res) => {
   });
 });
 
+// Ruta para eliminar múltiples archivos
+app.post("/delete-pdfs", (req, res) => {
+  const { ids } = req.body; // ids debería ser una lista de nombres de archivos
+  
+  if (!Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ message: "No se proporcionaron archivos para eliminar" });
+  }
+
+  const deletePromises = ids.map(filename => {
+    const filePath = path.join(uploadDir, filename);
+    return fs.promises.unlink(filePath).catch(err => {
+      console.error(`Error al eliminar el archivo ${filename}:`, err);
+    });
+  });
+
+  Promise.all(deletePromises)
+    .then(() => res.json({ message: "Archivos eliminados exitosamente" }))
+    .catch(err => res.status(500).json({ message: "Error al eliminar archivos" }));
+});
 
 
 
