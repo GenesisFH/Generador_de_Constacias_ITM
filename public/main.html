@@ -12,6 +12,8 @@
       <div class="button-container">
         <button onclick="generateConstancia()">Generar Constancia</button>
         <button onclick="manageUsers()">Administrar Usuarios</button>
+        <!-- Botón para ver constancias, inicialmente oculto -->
+        <button id="viewConstancias" onclick="viewConstancias()" style="display: none;">Constancias</button>
       </div>
     </div>
     <div class="encabezado-itm">
@@ -33,17 +35,20 @@
         window.location.href = "/administrar";
       }
 
+      function viewConstancias() {
+        window.location.href = "/review"; // Ruta que manejará la visualización de constancias
+      }
+
       // Hacer una petición a la API para obtener el userType
       fetch("/getUserType")
         .then((response) => response.json())
         .then((data) => {
           const userType = data.userType;
 
-          // Si el userType es 0, ocultar el botón de "Administrar Usuarios"
+          // Si el userType es 0, ocultar el botón de "Administrar Usuarios" y mostrar "Ver Constancias"
           if (userType === 0) {
-            document.querySelector(
-              'button[onclick="manageUsers()"]'
-            ).style.display = "none";
+            document.querySelector('button[onclick="manageUsers()"]').style.display = "none";
+            document.getElementById("viewConstancias").style.display = "inline-block";
           }
         })
         .catch((error) => {
