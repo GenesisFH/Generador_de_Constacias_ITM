@@ -27,6 +27,7 @@
           <table id="constancia-table" class="table">
             <thead class="thead-dark">
               <tr>
+                <th>#</th> <!-- Nueva columna para enumerar -->
                 <th>Seleccionar</th>
                 <th>Archivo</th>
                 <th>Enlace</th>
@@ -62,50 +63,57 @@
 
     <script>
       $(document).ready(function() {
-        // Obtener la lista de PDFs desde la API
-        $.get("/pdfs", function(data) {
-          const $tableBody = $("#pdf-list");
-          data.forEach(pdf => {
-            $tableBody.append(`
-              <tr>
-                <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.id}"></td>
-                <td>${pdf.name}</td>
-                <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
-                <td>${pdf.date}</td>
-              </tr>
-            `);
-          });
-        });
+  // Obtener la lista de PDFs desde la API
+  $.get("/pdfs", function(data) {
+    const $tableBody = $("#pdf-list");
 
-        // Manejar la eliminación de los PDFs seleccionados
-        $('#delete-selected').click(function() {
-          const selectedIds = [];
-          $('.pdf-checkbox:checked').each(function() {
-            selectedIds.push($(this).data('id'));
-          });
+    data.forEach((pdf, index) => {
+      const date = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = date.toLocaleDateString('es-ES', options); // Formato "día mes año"
 
-          if (selectedIds.length === 0) {
-            alert('Por favor, selecciona al menos un PDF para eliminar.');
-            return;
-          }
+      $tableBody.append(`
+        <tr>
+          <td>${index + 1}</td> <!-- Columna de enumeración -->
+          <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.id}"></td>
+          <td>${pdf.name}</td>
+          <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
+          <td>${formattedDate}</td> <!-- Columna de la fecha -->
+        </tr>
+      `);
+    });
+  });
 
-          // Realizar la petición para eliminar los PDFs seleccionados
-          $.ajax({
-            url: '/delete-pdfs',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ ids: selectedIds }),
-            success: function(response) {
-              alert('Los PDFs seleccionados han sido eliminados.');
-              location.reload();
-            },
-            error: function(error) {
-              console.error('Error al eliminar los PDFs:', error);
-              alert('Ocurrió un error al intentar eliminar los PDFs.');
-            }
-          });
-        });
-      });
+  // Manejar la eliminación de los PDFs seleccionados
+  $('#delete-selected').click(function() {
+    const selectedIds = [];
+    $('.pdf-checkbox:checked').each(function() {
+      selectedIds.push($(this).data('id'));
+    });
+
+    if (selectedIds.length === 0) {
+      alert('Por favor, selecciona al menos un PDF para eliminar.');
+      return;
+    }
+
+    // Realizar la petición para eliminar los PDFs seleccionados
+    $.ajax({
+      url: '/delete-pdfs',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ ids: selectedIds }),
+      success: function(response) {
+        alert('Los PDFs seleccionados han sido eliminados.');
+        location.reload();
+      },
+      error: function(error) {
+        console.error('Error al eliminar los PDFs:', error);
+        alert('Ocurrió un error al intentar eliminar los PDFs.');
+      }
+    });
+  });
+});
+
     </script>
   </body>
 </html>
