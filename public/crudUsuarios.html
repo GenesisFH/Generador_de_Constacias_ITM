@@ -118,18 +118,24 @@
     <script>
       $(document).ready(function() {
         $.get("/pdfs", function(data) {
-          const $tableBody = $("#pdf-list");
-          data.forEach(pdf => {
-            $tableBody.append(`
-              <tr>
-                <td>${pdf.name}</td>
-                <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
-                <td>${pdf.date}</td>
-              </tr>
-            `);
-          });
-        });
-      });
+    const $tableBody = $("#pdf-list");
+
+    data.forEach(pdf => {
+      // Crear la fecha de descarga en el formato "día mes año"
+      const date = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Configuración para mostrar la fecha
+      const formattedDate = date.toLocaleDateString('es-ES', options); // Formato en español
+
+      $tableBody.append(`
+        <tr>
+          <td>${pdf.name}</td>
+          <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
+          <td>${formattedDate}</td>
+        </tr>
+      `);
+    });
+  });
+});
     </script>
     <script src="js/user.js"></script>
   </body>

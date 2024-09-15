@@ -139,6 +139,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     const periodoText = `LOS DÍAS DEL ${data.periodo},`;
     const fechaTerminacionText = `MEXICALI, B.C. A ${data.fechaTerminacion}`;
     const horasCursoText = `CON DURACIÓN DE ${data.horasCurso} HORAS`; // Nuevo texto para horasCurso
+    const marcaAgua = "DOCUMENTO NO VÁLIDO";
 
     // Calcular ajuste en la posición X del nombre
     const nombreCompletoParts = data.nombreCompleto.split(" ");
@@ -199,6 +200,16 @@ async function generatePDF(data, tipoConstancia, templatePath) {
       color: PDFLib.rgb(0, 0, 0),
     });
 
+    firstPage.drawText(marcaAgua, {
+      x: xCentrado,  // Centrado
+      y: firstPage.getHeight() / 2,   // Centrado verticalmente
+      size: 50,
+      font: boldFont,
+      color: PDFLib.rgb(1, 0, 0), // Rojo para resaltar
+      opacity: 0.5, // Transparencia
+      rotate: PDFLib.degrees(45), // Rotar el texto
+    });
+
     const pdfBytes = await pdfDoc.save();
     return pdfBytes;
   } catch (error) {
@@ -209,6 +220,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
 
 function download(data, fileName, mimeType) {
   const blob = new Blob([data], { type: mimeType });
+  // lo comentado es en caso de que el usuario quiera descargarlo
  /* const url = window.URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.style.display = "none";
