@@ -133,15 +133,15 @@
     data.forEach((pdf, index) => {
       const date = new Date();
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      const formattedDate = new Date(pdf.date).toLocaleDateString('es-ES', options); // Formato "día mes año"
+      const formattedDate = date.toLocaleDateString('es-ES', options); // Formato "día mes año"
 
       $tableBody.append(`
         <tr>
-          <td>${index + 1}</td>
-          <td><input type="checkbox" class="pdf-checkbox" data-file="${pdf.name}"></td>
+          <td>${index + 1}</td> <!-- Columna de enumeración -->
+          <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.id}"></td>
           <td>${pdf.name}</td>
           <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
-          <td>${formattedDate}</td>
+          <td>${formattedDate}</td> <!-- Columna de la fecha -->
         </tr>
       `);
     });

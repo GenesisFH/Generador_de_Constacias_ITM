@@ -10,6 +10,28 @@
     />
     <link rel="stylesheet" href="static/css/normalize.css" />
     <link rel="stylesheet" href="static/css/constancias.css" />
+    <style>
+      /* Estilo personalizado */
+      .form-row .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #periodoInicio, #periodoFin {
+        width: 100%;
+      }
+
+      /* Ajustar margen entre campos */
+      #periodoInicio {
+        margin-left: 5px;
+      }
+      #periodoFin {
+        margin-left: 12px;
+      }
+      #periodoFinal {
+        margin-left: 2px;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-3 texto-centro-justificado">
@@ -85,35 +107,52 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="horasCurso">Número de Horas Duración</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="horasCurso"
-                    placeholder="Ejemplo: 30"
-                  />
+                  <label for="duracion">Duración</label>
+                  <select class="form-control" id="horasCurso">
+                    <!-- Genera las opciones desde 1 hasta 90 -->
+                    <option value="" disabled selected>Seleccione las horas</option>
+                    <option value="1">1 hora</option>
+                    <!-- Las siguientes líneas se generan dinámicamente -->
+                    <script>
+                      for (let i = 2; i <= 90; i++) {
+                        document.write(`<option value="${i}">${i} horas</option>`);
+                      }
+                    </script>
+                  </select>
+                                  
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="periodo">Periodo</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="periodo"
-                    placeholder="Ejemplo: 08 AL 12 DE ENERO DE 2024"
-                  />
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="periodoInicio">Fecha de Inicio</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="periodoInicio"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="periodoFin">Fecha de Fin</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="periodoFin"
+                    />
+                  </div>
                 </div>
+                
               </div>
               <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="fechaTerminacion">Fecha de Terminación</label>
+                <div class="form-group col-md-6 negrita-curso">
+                  <label for="correo">Correo Electrónico</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="fechaTerminacion"
-                    placeholder="12 DE ENERO DE 2024"
+                    id="correoElectronico"
+                    placeholder="Ejemplo: Luiscarlos12@gmail.com"
                   />
                 </div>
               </div>
+              
               <div class="form-group">
                 <label for="nombreArchivo">Nombre del Archivo</label>
                 <input
@@ -124,7 +163,7 @@
                 />
               </div>
               <button type="submit" class="btn custom-btn-primary btn-block">
-                Generar Constancia
+                Enviar Solicitud
               </button>
             </form>
           </div>

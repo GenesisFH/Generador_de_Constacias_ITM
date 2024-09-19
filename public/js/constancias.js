@@ -7,13 +7,13 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
   const apellidoMaterno = document.getElementById("apellidoMaterno").value.toUpperCase();
   const codigo = document.getElementById("codigo").value;
   const curso = document.getElementById("curso").value.toUpperCase();
-  const periodo = document.getElementById("periodo").value.toUpperCase();
-  const fechaTerminacion = document.getElementById("fechaTerminacion").value.toUpperCase();
+  const periodoInicio = document.getElementById("periodoInicio").value;
+  const periodoFin = document.getElementById("periodoFin").value;
   const nombreArchivo = document.getElementById("nombreArchivo").value.toUpperCase();
-  const horasCurso = document.getElementById("horasCurso").value.toUpperCase(); // Agregado
+  const horasCurso = document.getElementById("horasCurso").value; // Se eliminó .toUpperCase()
 
   // Verifica que todos los campos estén llenos
-  if (!nombres || !apellidoPaterno || !apellidoMaterno || !codigo || !curso || !periodo || !fechaTerminacion || !nombreArchivo || !horasCurso) {
+  if (!nombres || !apellidoPaterno || !apellidoMaterno || !codigo || !curso || !periodoInicio || !periodoFin || !nombreArchivo || !horasCurso) {
     alert("Por favor, llena todos los campos.");
     return;
   }
@@ -22,12 +22,12 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     nombreCompleto: `${nombres} ${apellidoPaterno} ${apellidoMaterno}`,
     clave: codigo,
     curso: curso,
-    periodo: periodo,
-    fechaTerminacion: fechaTerminacion,
+    finicio: periodoInicio,
+    ffin: periodoFin,
     nombreArchivo: nombreArchivo,
-    horasCurso: horasCurso, // Agregado
+    horasCurso: horasCurso,
   };
-
+  
   const tipoConstancia = document.getElementById("tipoConstancia").value;
   const templatePath = `/static/pdf/${tipoConstancia}.pdf`; // Ruta ajustada
 
@@ -64,8 +64,8 @@ document.getElementById("generateFromExcel").addEventListener("click", async () 
         nombreCompleto: (row["NOMBRE DEL PARTICIPANTE"] || "Nombre no especificado").toUpperCase(),
         clave: (row["CLAVE"] || "Clave no especificada").toUpperCase(),
         curso: (row["CURSO"] || "Curso no especificado").toUpperCase(),
-        periodo: (row["PERIODO"] || "Periodo no especificado").toUpperCase(),
-        fechaTerminacion: (row["FECHA DE TERMINACION"] || "Fecha de terminación no especificada").toUpperCase(),
+        periodoInicio: (row["FECHA DE INICIO"] || "Fecha de inicio no especificada").toUpperCase(),
+        periodoFin: (row["FECHA DE TERMINACIÓN"] || "Fecha de terminación no especificada").toUpperCase(),
         horasCurso: (row["HORAS CURSO"] || "Horas no especificadas").toUpperCase(), // Agregado
       }));
 
@@ -100,31 +100,32 @@ const coordenadas = {
     curso: { x: 180, y: 355 },
     periodo: { x: 156, y: 320 },
     clave: { x: 180, y: 292 },
-    fechaTerminacion: { x: 150, y: 260 },
-    horasCurso: { x: 150, y: 305 }, // Nueva coordenada para horasCurso
+    periodoInicio: { x: 150, y: 260 },
+    periodoFin: { x: 160, y: 260 },
+    horasCurso: { x: 150, y: 305 }, 
   },
   tipo2: {
     nombre: { x: 200, y: 410 },
     curso: { x: 200, y: 355 },
-    periodo: { x: 200, y: 315 },
+    periodoInicio: { x: 150, y: 260 },
+    periodoFin: { x: 160, y: 260 },
     clave: { x: 200, y: 272 },
-    fechaTerminacion: { x: 200, y: 230 },
     horasCurso: { x: 200, y: 190 }, // Nueva coordenada para horasCurso
   },
   tipo3: {
     nombre: { x: 200, y: 415 },
     curso: { x: 200, y: 336 },
-    periodo: { x: 200, y: 298 },
+    periodoInicio: { x: 150, y: 260 },
+    periodoFin: { x: 160, y: 260 },
     clave: { x: 200, y: 258 },
-    fechaTerminacion: { x: 200, y: 218 },
     horasCurso: { x: 200, y: 178 }, // Nueva coordenada para horasCurso
   },
   tipo4: {
     nombre: { x: 200, y: 410 },
     curso: { x: 200, y: 355 },
-    periodo: { x: 200, y: 315 },
+    periodoInicio: { x: 150, y: 260 },
+    periodoFin: { x: 160, y: 260 },
     clave: { x: 200, y: 272 },
-    fechaTerminacion: { x: 200, y: 230 },
     horasCurso: { x: 200, y: 190 }, // Nueva coordenada para horasCurso
   },
 };
@@ -139,8 +140,8 @@ async function generatePDF(data, tipoConstancia, templatePath) {
 
     const claveText = `CLAVE DEL CURSO: ${data.clave}`;
     const cursoText = `"${data.curso}"`; // Solo el nombre del curso
-    const periodoText = `LOS DÍAS DEL ${data.periodo},`;
-    const fechaTerminacionText = `MEXICALI, B.C. A ${data.fechaTerminacion}`;
+    const periodoText = `LOS DÍAS DEL ${data.periodoInicio} AL ${data.periodoFin},`;
+    const fechaTerminacionText = `MEXICALI, B.C. A ${data.periodoFin}`;
     const horasCursoText = `CON DURACIÓN DE ${data.horasCurso} HORAS`; // Nuevo texto para horasCurso
     const marcaAgua = "DOCUMENTO NO VÁLIDO";
 
@@ -189,9 +190,9 @@ async function generatePDF(data, tipoConstancia, templatePath) {
       color: PDFLib.rgb(0, 0, 0),
     });
 
-    firstPage.drawText(fechaTerminacionText, {
+    firstPage.drawText(periodoText, {
       x: xCentrado,
-      y: coordenadas[tipoConstancia].fechaTerminacion.y,
+      y: coordenadas[tipoConstancia].periodoFin.y,
       size: 11,
       color: PDFLib.rgb(0, 0, 0),
     });
@@ -223,15 +224,6 @@ async function generatePDF(data, tipoConstancia, templatePath) {
 
 function download(data, fileName, mimeType) {
   const blob = new Blob([data], { type: mimeType });
-  // lo comentado es en caso de que el usuario quiera descargarlo
- /* const url = window.URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.style.display = "none";
-  a.href = url;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  window.URL.revokeObjectURL(url);*/
   uploadToServer(blob, fileName);
 }
 // lo
