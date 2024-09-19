@@ -347,3 +347,17 @@
   [hidden] {
     display: none;
   }
+  /* Asegurar que los campos ocupen la mitad del espacio disponible */
+.form-row .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#periodoInicio, #periodoFin {
+  width: 100%; /* Mantiene el ancho total dentro de su contenedor */
+}
+
+/* Opcional: espaciado entre los dos campos */
+#periodoInicio {
+  margin-right: 15px;
+}

@@ -85,7 +85,7 @@ app.get("/pdfs", (req, res) => {
         return {
           name: file,
           url: `/new-uploads/${file}`,
-          date: stats.mtime.toLocaleDateString() // Fecha de modificación
+          date: stats.birthtime.toLocaleDateString() // Fecha de modificación
         };
       });
 
