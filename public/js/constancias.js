@@ -7,7 +7,9 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
   const apellidoMaterno = document.getElementById("apellidoMaterno").value.toUpperCase();
   const codigo = document.getElementById("codigo").value;
   const curso = document.getElementById("curso").value.toUpperCase();
-  const periodo = document.getElementById("periodo").value.toUpperCase();
+  const periodoInicio = document.getElementById("periodoInicio").value();
+  const periodoFin = document.getElementById("periodoFin").value();
+  // const periodo = document.getElementById("periodo").value.toUpperCase();
   const fechaTerminacion = document.getElementById("fechaTerminacion").value.toUpperCase();
   const nombreArchivo = document.getElementById("nombreArchivo").value.toUpperCase();
   const horasCurso = document.getElementById("horasCurso").value.toUpperCase(); // Agregado
@@ -22,8 +24,8 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     nombreCompleto: `${nombres} ${apellidoPaterno} ${apellidoMaterno}`,
     clave: codigo,
     curso: curso,
-    periodo: periodo,
-    fechaTerminacion: fechaTerminacion,
+    finicio: `${periodoInicio} ${periodoFin}`,
+    ffin: `${periodoFin}`,
     nombreArchivo: nombreArchivo,
     horasCurso: horasCurso, // Agregado
   };
