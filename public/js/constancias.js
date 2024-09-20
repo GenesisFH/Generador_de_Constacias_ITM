@@ -1,5 +1,6 @@
 document.getElementById("constanciaForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+  
 
   // Obtén todos los valores del formulario
   const nombres = document.getElementById("nombres").value.toUpperCase();
@@ -7,8 +8,8 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
   const apellidoMaterno = document.getElementById("apellidoMaterno").value.toUpperCase();
   const codigo = document.getElementById("codigo").value;
   const curso = document.getElementById("curso").value.toUpperCase();
-  const periodoInicio = document.getElementById("periodoInicio").value;
-  const periodoFin = document.getElementById("periodoFin").value;
+  let periodoInicio = document.getElementById("periodoInicio").value;
+  let periodoFin = document.getElementById("periodoFin").value;
   const nombreArchivo = document.getElementById("nombreArchivo").value.toUpperCase();
   const horasCurso = document.getElementById("horasCurso").value; // Se eliminó .toUpperCase()
 
@@ -17,6 +18,10 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     alert("Por favor, llena todos los campos.");
     return;
   }
+  const options2 = { month: 'long', day: 'numeric' };
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  periodoInicio = new Date(periodoInicio).toLocaleDateString('es-ES', options2);
+  periodoFin = new Date(periodoFin).toLocaleDateString('es-ES', options);
 
   const data = {
     nombreCompleto: `${nombres} ${apellidoPaterno} ${apellidoMaterno}`,
@@ -27,7 +32,7 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     nombreArchivo: nombreArchivo,
     horasCurso: horasCurso,
   };
-  
+
   const tipoConstancia = document.getElementById("tipoConstancia").value;
   const templatePath = `/static/pdf/${tipoConstancia}.pdf`; // Ruta ajustada
 
@@ -132,6 +137,7 @@ const coordenadas = {
 
 async function generatePDF(data, tipoConstancia, templatePath) {
   try {
+    
     const existingPdfBytes = await fetch(templatePath).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
     const pages = pdfDoc.getPages();
@@ -140,8 +146,8 @@ async function generatePDF(data, tipoConstancia, templatePath) {
 
     const claveText = `CLAVE DEL CURSO: ${data.clave}`;
     const cursoText = `"${data.curso}"`; // Solo el nombre del curso
-    const periodoText = `LOS DÍAS DEL ${data.periodoInicio} AL ${data.periodoFin},`;
-    const fechaTerminacionText = `MEXICALI, B.C. A ${data.periodoFin}`;
+    const periodoText = `DEL DÍA ${data.finicio} AL ${data.ffin},`; // Actualiza el texto del periodo correctamente
+    const fechaTerminacionText = `MEXICALI, B.C. A ${data.ffin}`;
     const horasCursoText = `CON DURACIÓN DE ${data.horasCurso} HORAS`; // Nuevo texto para horasCurso
     const marcaAgua = "DOCUMENTO NO VÁLIDO";
 
@@ -159,7 +165,6 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     const textWidth = boldFont.widthOfTextAtSize(cursoText, fontSize);
     const xCentrado = (pageWidth - textWidth) / 2; // Centrar en la página
 
-
     firstPage.drawText(data.nombreCompleto, {
       x: nombreX,
       y: coordenadas[tipoConstancia].nombre.y,
@@ -167,7 +172,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
       font: boldFont, // Aplica negrita en el texto
       color: PDFLib.rgb(0, 0, 0),
     });
-
+    
     firstPage.drawText(cursoText, {
       x: xCentrado,
       y: coordenadas[tipoConstancia]?.curso.y || 355,
@@ -190,7 +195,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
       color: PDFLib.rgb(0, 0, 0),
     });
 
-    firstPage.drawText(periodoText, {
+    firstPage.drawText(fechaTerminacionText, {
       x: xCentrado,
       y: coordenadas[tipoConstancia].periodoFin.y,
       size: 11,
@@ -205,7 +210,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     });
 
     firstPage.drawText(marcaAgua, {
-      x: 60,  // Centrado
+      x: 50,  // Centrado
       y: 150,   // Centrado verticalmente
       size: 60,
       font: boldFont,
