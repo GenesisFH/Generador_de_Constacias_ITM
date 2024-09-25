@@ -245,7 +245,7 @@ function uploadToServer(file, fileName) {
   })
   .then(response => response.json())
   .then(data => {
-    console.log('File uploaded successfully:', data);
+    alert('El archivo se ha enviado correctamente.', data);
   })
   .catch(error => {
     console.error('Error uploading file:', error);

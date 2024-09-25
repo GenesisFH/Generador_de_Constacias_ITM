@@ -196,7 +196,7 @@ button:hover{
 }
 
 .bx {
-    font-size: 30px;
-    transform: translateX(-35px);
+    font-size: 25px;
+    transform: translateY(-1px) translateX(-2px);
     cursor: pointer;
 }
