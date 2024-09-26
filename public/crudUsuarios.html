@@ -161,6 +161,16 @@
             $(this).closest('tr').find('.estado').text("Aprobado");
           });
         });
+        // Manejar el clic en "Rechzar Solicitud"
+        $("#send-request-reject").click(function () {
+          // Cambiar el estado de los PDFs seleccionados
+          $(".pdf-checkbox:checked").each(function () {
+            const id = $(this).data("id");
+    
+            // Encontrar la celda de estado correspondiente
+            $(this).closest('tr').find('.estado').text("No aprobado");
+          });
+        });
     
         // Manejar la eliminación de los PDFs seleccionados
         $("#delete-selected").click(function () {
