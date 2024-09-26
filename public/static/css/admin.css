@@ -1,5 +1,5 @@
-  /* Estilos adicionales */
-  body {
+/* Estilos adicionales */
+body {
     font-family: 'PT Sans', sans-serif;
     background-color: #f8f9fa;
 }
@@ -21,6 +21,8 @@ main {
 .nav-link:hover {
     color: #007bff;
 }
+
+/* Estilo para botón primario (general) */
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -30,53 +32,99 @@ main {
     background-color: #0056b3;
     border-color: #0056b3;
 }
-.table {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+/* Botón de Aprobar (verde) */
+button.aprobar {
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button.aprobar:hover {
+    background-color: #218838;
 }
 
-button.editar {
-  background-color: #007bff;
-  border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Botón de Rechazar (rojo) */
+button.rechazar {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button.rechazar:hover {
+    background-color: #c82333;
 }
 
-/* Estilos para los botones de editar */
-button.editar, button.editar-p {
-  background-color: #ffc107;
-  border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Botón de Eliminar (rojo oscuro) */
+button.eliminar {
+    background-color: #2d26ec;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-
-button.editar:hover {
-  background-color: #e0a800;
-}
-
-/* Estilos para los botones de eliminar */
-button.eliminar, button.eliminar-p {
-  background-color: #dc3545;
-  border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
 button.eliminar:hover {
-  background-color: #c82333;
+    background-color: #4552df;
 }
 
-img{
-  width: 50px;
-  height: 50px;
+/* Estilo para editar (amarillo) */
+button.editar {
+    background-color: #ffc107;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button.editar:hover {
+    background-color: #e0a800;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Estilos por defecto de la navegación */
+.nav-link {
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo para el hover en los enlaces */
+.nav-link:hover {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+/* Estilos para cuando una sección está activa */
+.nav-link.active {
+    background-color: #28a745; /* Color verde para la sección activa */
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+/* Efectos adicionales para la sección de Constancias */
+#nav-constancias:hover {
+    background-color: #324cc0;
+    color: white;
+}
+
+/* Efectos adicionales para la sección de Usuarios */
+#nav-usuarios:hover {
+    background-color: #a9c000;
+    color: white;
 }

@@ -22,7 +22,6 @@
     <div class="container">
       <!-- Contenedor principal -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <!-- Barra de navegación -->
         <button
           class="navbar-toggler"
           type="button"
@@ -36,18 +35,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Usuarios</a>
-              <!-- Enlace a la sección de Usuarios -->
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Constancias</a>
-              <!-- Enlace a la sección de Productos -->
+              <a class="nav-link" href="#sec-constancias" id="nav-constancias">Constancias</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#sec-usuarios" id="nav-usuarios">Usuarios</a>
             </li>
           </ul>
         </div>
       </nav>
-
+      
       <main>
         <!-- Contenido principal -->
         <section id="sec-usuarios">
@@ -98,6 +95,7 @@
                 <th>Archivo</th>
                 <th>Enlace</th>
                 <th>Fecha</th>
+                <th>Estado</th>
               </tr>
             </thead>
             <tbody id="pdf-list">
@@ -107,16 +105,21 @@
           <!-- ... -->
         </section>
         <!-- ... -->
-        <button id="delete-selected" class="btn btn-danger">
+        <button id="delete-selected" class="btn eliminar">
           Eliminar Seleccionados
         </button>
-          <!-- Botón para enviar solicitud -->
-        <button id="send-request" class="btn btn-primary">
-            Aceptar Solicitud
+        
+        <button id="send-request" class="btn aprobar">
+          Aceptar Solicitud
         </button>
+        
+        <button id="send-request-reject" class="btn rechazar">
+          Rechazar Solicitud
+        </button>
+        
         <button onclick="window.location.href = '/main';" class="btn btn-dark">
           Regresar
-        </button>
+        </button>        
       </main>
     </div>
 
@@ -125,61 +128,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-     $(document).ready(function() {
+      $(document).ready(function () {
   // Obtener la lista de PDFs desde la API
-  $.get("/pdfs", function(data) {
+  $.get("/pdfs", function (data) {
     const $tableBody = $("#pdf-list");
 
     data.forEach((pdf, index) => {
-      const date = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      const formattedDate = date.toLocaleDateString('es-ES', options); // Formato "día mes año"
+      // Asegúrate de que la fecha de generación esté incluida en `pdf`
+      const formattedDate = pdf.fechaGeneracion; // Usar la fecha generada desde el servidor
 
+      // Insertar filas con ID único para el estado
       $tableBody.append(`
         <tr>
-          <td>${index + 1}</td> <!-- Columna de enumeración -->
-          <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.id}"></td>
+          <td>${index + 1}</td>
+          <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.name}"></td>
           <td>${pdf.name}</td>
           <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
-          <td>${formattedDate}</td> <!-- Columna de la fecha -->
+          <td>${formattedDate}</td>
+          <td class="estado" id="estado-${index}">No aprobado</td>
         </tr>
       `);
     });
   });
-
-  // Manejar la eliminación de los PDFs seleccionados
-  $('#delete-selected').click(function() {
-    const selectedFiles = [];
-    $('.pdf-checkbox:checked').each(function() {
-      selectedFiles.push($(this).data('file'));
-    });
-
-    console.log(selectedFiles); // Verifica que los nombres de archivos se están capturando
-
-    if (selectedFiles.length === 0) {
-      alert('Por favor, selecciona al menos un PDF para eliminar.');
-      return;
-    }
-
-    $.ajax({
-      url: '/delete-pdfs',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({ ids: selectedFiles }),
-      success: function(response) {
-        alert('Los PDFs seleccionados han sido eliminados.');
-        location.reload();
-      },
-      error: function(error) {
-        console.error('Error al eliminar los PDFs:', error);
-        alert('Ocurrió un error al intentar eliminar los PDFs.');
-      }
-    });
-  });
-});
-
-        
+    
+        // Manejar el clic en "Aceptar Solicitud"
+        $("#send-request").click(function () {
+          // Cambiar el estado de los PDFs seleccionados
+          $(".pdf-checkbox:checked").each(function () {
+            const id = $(this).data("id");
+    
+            // Encontrar la celda de estado correspondiente
+            $(this).closest('tr').find('.estado').text("Aprobado");
+          });
+        });
+    
+        // Manejar la eliminación de los PDFs seleccionados
+        $("#delete-selected").click(function () {
+          const selectedIds = [];
+          $(".pdf-checkbox:checked").each(function () {
+            selectedIds.push($(this).data("id"));
+          });
+    
+          if (selectedIds.length === 0) {
+            alert("Por favor, selecciona al menos un PDF para eliminar.");
+            return;
+          }
+    
+          // Realizar la petición para eliminar los PDFs seleccionados
+          $.ajax({
+            url: "/delete-pdfs",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ ids: selectedIds }),
+            success: function (response) {
+              alert("Los PDFs seleccionados han sido eliminados.");
+              location.reload();
+            },
+            error: function (error) {
+              console.error("Error al eliminar los PDFs:", error);
+              alert("Ocurrió un error al intentar eliminar los PDFs.");
+            },
+          });
+        });
+      });
     </script>
+    
     <script src="js/user.js"></script>
   </body>
 </html>

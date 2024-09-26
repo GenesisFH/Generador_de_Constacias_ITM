@@ -1,12 +1,22 @@
 $(document).ready(function () {
-  // Por defecto, mostrar solo la sección de Usuarios al cargar la página
-  $("#sec-constancias").hide();
+  // Ocultar la sección de Constancias por defecto y mostrar la de Usuarios
+  $("#sec-constancias").hide(); // Ocultar la sección de Constancias
+  $("#sec-usuarios").show(); // Mostrar la sección de Usuarios por defecto
 
   // Al hacer clic en el enlace de Usuarios o Constancias, alternar entre secciones
   $(".nav-link").click(function (event) {
-    event.preventDefault();
-    $("#sec-usuarios").toggle();
-    $("#sec-constancias").toggle();
+    event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+
+    // Obtener el ID de la sección a mostrar según el enlace clicado
+    const sectionId = $(this).attr("href");
+
+    // Ocultar ambas secciones y luego mostrar la sección seleccionada
+    $("#sec-usuarios, #sec-constancias").hide();
+    $(sectionId).show();
+
+    // Actualizar la clase activa
+    $(".nav-link").removeClass("active"); // Remover la clase activa de todos los enlaces
+    $(this).addClass("active"); // Añadir clase activa al enlace clicado
   });
 
   // Función para cargar usuarios desde el servidor

@@ -19,9 +19,12 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     return;
   }
   const options2 = { month: 'long', day: 'numeric' };
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const options1 = { year: 'numeric', month: 'long', day: 'numeric' };
   periodoInicio = new Date(periodoInicio).toLocaleDateString('es-ES', options2);
-  periodoFin = new Date(periodoFin).toLocaleDateString('es-ES', options);
+  periodoFin = new Date(periodoFin).toLocaleDateString('es-ES', options1);
+
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const fechaGeneracion = new Date().toLocaleDateString('es-ES', options); // Obtener fecha actual
 
   const data = {
     nombreCompleto: `${nombres} ${apellidoPaterno} ${apellidoMaterno}`,
@@ -31,6 +34,7 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
     ffin: periodoFin,
     nombreArchivo: nombreArchivo,
     horasCurso: horasCurso,
+    fechaGeneracion: fechaGeneracion // Agregar fecha de generación
   };
 
   const tipoConstancia = document.getElementById("tipoConstancia").value;
