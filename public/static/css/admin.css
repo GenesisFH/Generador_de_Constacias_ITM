@@ -119,12 +119,12 @@ img {
 
 /* Efectos adicionales para la sección de Constancias */
 #nav-constancias:hover {
-    background-color: #28a745;
+    background-color: #324cc0;
     color: white;
 }
 
 /* Efectos adicionales para la sección de Usuarios */
 #nav-usuarios:hover {
-    background-color: #dc3545;
+    background-color: #a9c000;
     color: white;
 }
