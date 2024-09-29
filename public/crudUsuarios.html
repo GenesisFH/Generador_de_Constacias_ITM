@@ -94,7 +94,7 @@
                 <th>Seleccionar</th>
                 <th>Archivo</th>
                 <th>Enlace</th>
-                <th>Fecha</th>
+                <th>Email</th>
                 <th>Estado</th>
               </tr>
             </thead>
@@ -131,26 +131,24 @@
       $(document).ready(function () {
   // Obtener la lista de PDFs desde la API
   $.get("/pdfs", function (data) {
-    const $tableBody = $("#pdf-list");
+  const $tableBody = $("#pdf-list");
+  
+  data.forEach((pdf, index) => {
+    const formattedDate = pdf.fechaGeneracion;
+    const correo = pdf.correoElectronico || 'Correo no disponible'; // Agrega un valor adecuado
 
-    data.forEach((pdf, index) => {
-      // Asegúrate de que la fecha de generación esté incluida en `pdf`
-      const formattedDate = pdf.fechaGeneracion; // Usar la fecha generada desde el servidor
-
-      // Insertar filas con ID único para el estado
-      $tableBody.append(`
-        <tr>
-          <td>${index + 1}</td>
-          <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.name}"></td>
-          <td>${pdf.name}</td>
-          <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
-          <td>${formattedDate}</td>
-          <td class="estado" id="estado-${index}">No aprobado</td>
-        </tr>
-      `);
-    });
+    $tableBody.append(`
+      <tr>
+        <td>${index + 1}</td>
+        <td><input type="checkbox" class="pdf-checkbox" data-id="${pdf.name}"></td>
+        <td>${pdf.name}</td>
+        <td><a href="${pdf.url}" target="_blank">Ver PDF</a></td>
+        <td>${correo}</td> <!-- Muestra el correo -->
+        <td class="estado" id="estado-${index}">No aprobado</td>
+      </tr>
+    `);
   });
-    
+});
         // Manejar el clic en "Aceptar Solicitud"
         $("#send-request").click(function () {
           // Cambiar el estado de los PDFs seleccionados
@@ -200,6 +198,29 @@
             },
           });
         });
+        // Mostrar u ocultar botones según la sección activa
+    function toggleButtons(section) {
+      if (section === 'usuarios') {
+        // Solo mostrar el botón "Regresar"
+        $("#delete-selected, #send-request, #send-request-reject").hide();
+      } else if (section === 'constancias') {
+        // Mostrar todos los botones
+        $("#delete-selected, #send-request, #send-request-reject").show();
+      }
+    }
+
+    // Detectar cuando haces clic en "Usuarios" o "Constancias"
+    $("#nav-usuarios").click(function () {
+      toggleButtons('usuarios');
+    });
+
+    $("#nav-constancias").click(function () {
+      toggleButtons('constancias');
+    });
+
+    // Inicializar mostrando los botones según la sección que esté activa por defecto
+    const activeSection = window.location.hash === '#sec-usuarios' ? 'usuarios' : 'constancias';
+    toggleButtons(activeSection);
       });
     </script>
     
