@@ -186,7 +186,7 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     });
 
     firstPage.drawText(periodoText, {
-      x: coordenadas[tipoConstancia].periodo.x,
+      x: 130,
       y: coordenadas[tipoConstancia].periodo.y,
       size: 14,
       color: PDFLib.rgb(0, 0, 0),
@@ -200,14 +200,14 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     });
 
     firstPage.drawText(fechaTerminacionText, {
-      x: xCentrado,
+      x: 170,
       y: coordenadas[tipoConstancia].periodoFin.y,
       size: 11,
       color: PDFLib.rgb(0, 0, 0),
     });
 
     firstPage.drawText(horasCursoText, {
-      x: xCentrado,
+      x: 160,
       y: coordenadas[tipoConstancia]?.horasCurso.y || 190,
       size: 14,
       color: PDFLib.rgb(0, 0, 0),
