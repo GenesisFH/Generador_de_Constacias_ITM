@@ -35,7 +35,7 @@ main {
 
 /* Botón de Aprobar (verde) */
 button.aprobar {
-    background-color: #28a745;
+    background-color: #007bff;
     border: none;
     color: #fff;
     padding: 6px 12px;
@@ -44,12 +44,12 @@ button.aprobar {
     transition: background-color 0.3s;
 }
 button.aprobar:hover {
-    background-color: #218838;
+    background-color: #036cdd;
 }
 
 /* Botón de Rechazar (rojo) */
 button.rechazar {
-    background-color: #dc3545;
+    background-color: #bb0000;
     border: none;
     color: #fff;
     padding: 6px 12px;
@@ -58,12 +58,12 @@ button.rechazar {
     transition: background-color 0.3s;
 }
 button.rechazar:hover {
-    background-color: #c82333;
+    background-color: #ff2828;
 }
 
 /* Botón de Eliminar (rojo oscuro) */
 button.eliminar {
-    background-color: #2d26ec;
+    background-color: #333;
     border: none;
     color: #fff;
     padding: 6px 12px;
@@ -72,7 +72,8 @@ button.eliminar {
     transition: background-color 0.3s;
 }
 button.eliminar:hover {
-    background-color: #4552df;
+    color: #f8f9fa;
+    background-color: #000000;
 }
 
 /* Estilo para editar (amarillo) */
@@ -111,7 +112,7 @@ img {
 
 /* Estilos para cuando una sección está activa */
 .nav-link.active {
-    background-color: #28a745; /* Color verde para la sección activa */
+    background-color: #B57EDC; /* Color verde para la sección activa */
     color: #fff;
     padding: 8px 15px;
     border-radius: 8px;
@@ -125,6 +126,6 @@ img {
 
 /* Efectos adicionales para la sección de Usuarios */
 #nav-usuarios:hover {
-    background-color: #a9c000;
+    background-color: #324cc0;
     color: white;
 }

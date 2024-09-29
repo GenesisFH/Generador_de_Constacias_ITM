@@ -12,6 +12,7 @@ document.getElementById("constanciaForm").addEventListener("submit", async (e) =
   let periodoFin = document.getElementById("periodoFin").value;
   const nombreArchivo = document.getElementById("nombreArchivo").value.toUpperCase();
   const horasCurso = document.getElementById("horasCurso").value; // Se eliminó .toUpperCase()
+  const correo = document.getElementById('correoElectronico').value;
 
   // Verifica que todos los campos estén llenos
   if (!nombres || !apellidoPaterno || !apellidoMaterno || !codigo || !curso || !periodoInicio || !periodoFin || !nombreArchivo || !horasCurso) {
