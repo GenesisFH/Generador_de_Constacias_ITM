@@ -115,28 +115,31 @@ const coordenadas = {
     horasCurso: { x: 150, y: 305 }, 
   },
   tipo2: {
-    nombre: { x: 200, y: 410 },
-    curso: { x: 200, y: 355 },
+    nombre: { x: 180, y: 410 },
+    curso: { x: 180, y: 355 },
+    periodo: { x: 156, y: 320 },
+    clave: { x: 180, y: 292 },
     periodoInicio: { x: 150, y: 260 },
     periodoFin: { x: 160, y: 260 },
-    clave: { x: 200, y: 272 },
-    horasCurso: { x: 200, y: 190 }, // Nueva coordenada para horasCurso
+    horasCurso: { x: 150, y: 305 }, 
   },
   tipo3: {
-    nombre: { x: 200, y: 415 },
-    curso: { x: 200, y: 336 },
+    nombre: { x: 180, y: 410 },
+    curso: { x: 180, y: 355 },
+    periodo: { x: 156, y: 340 },
+    clave: { x: 180, y: 292 },
     periodoInicio: { x: 150, y: 260 },
-    periodoFin: { x: 160, y: 260 },
-    clave: { x: 200, y: 258 },
-    horasCurso: { x: 200, y: 178 }, // Nueva coordenada para horasCurso
+    periodoFin: { x: 170, y: 200 },
+    horasCurso: { x: 150, y: 305 }, 
   },
   tipo4: {
-    nombre: { x: 200, y: 410 },
-    curso: { x: 200, y: 355 },
+    nombre: { x: 180, y: 410 },
+    curso: { x: 180, y: 355 },
+    periodo: { x: 156, y: 320 },
+    clave: { x: 180, y: 292 },
     periodoInicio: { x: 150, y: 260 },
     periodoFin: { x: 160, y: 260 },
-    clave: { x: 200, y: 272 },
-    horasCurso: { x: 200, y: 190 }, // Nueva coordenada para horasCurso
+    horasCurso: { x: 150, y: 305 }, 
   },
 };
 
@@ -201,14 +204,14 @@ async function generatePDF(data, tipoConstancia, templatePath) {
     });
 
     firstPage.drawText(fechaTerminacionText, {
-      x: 170,
+      x: 190,
       y: coordenadas[tipoConstancia].periodoFin.y,
       size: 11,
       color: PDFLib.rgb(0, 0, 0),
     });
 
     firstPage.drawText(horasCursoText, {
-      x: 160,
+      x: 195,
       y: coordenadas[tipoConstancia]?.horasCurso.y || 190,
       size: 14,
       color: PDFLib.rgb(0, 0, 0),
